@@ -15,14 +15,19 @@ const schema = yup.object().shape({
 
 const Home = () => {
   const methods = useForm<IFormInputs>({
-    resolver: yupResolver(schema)
+    resolver: yupResolver(schema),
+    defaultValues: {
+      email: "",
+      password: ""
+    }
   })
 
-  const {handleSubmit}= methods; 
+  const {handleSubmit, reset}= methods; 
 
 
   const onSubmit = (data: IFormInputs) => {
-    console.log(data)
+    console.log(data);
+    reset();
 
   }
   return (
@@ -50,7 +55,7 @@ const Home = () => {
               Login RHF
             </Typography>
             <RHFTextInput name="email" label="Email"/>
-            <RHFTextInput name="password" label="Senha"/>
+            <RHFTextInput type="password" name="password" label="Senha"/>
             <Button type="submit" variant="contained">Enviar</Button>
           </Stack>
         </form>
